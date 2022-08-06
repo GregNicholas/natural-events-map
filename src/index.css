@@ -1,0 +1,47 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+}
+
+/* .map {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+} */
+
+.container {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 1024px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.map-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.map-icon {
+  color: red;
+  font-size: 2rem;
+}
