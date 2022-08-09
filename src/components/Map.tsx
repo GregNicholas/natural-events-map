@@ -1,54 +1,54 @@
 import {
   MapContainer,
-  TileLayer,
-  Marker,
-  Popup
+  TileLayer
 } from 'react-leaflet'
-import { renderToStaticMarkup } from 'react-dom/server';
-import * as L from "leaflet";
-import { MdOutlineLocalFireDepartment } from 'react-icons/md';
+import LocationMarker from './LocationMarker'
+import {EventData} from '../types'
+// import { renderToStaticMarkup } from 'react-dom/server';
+// import * as L from "leaflet";
 
-const Map = () => {
-  const mapData = {city: "Cabazon", state: "California", country: "USA", location: Object, current: Object}
-  const center = [33.91752, -116.78724];
-  const zoom = 7;
-  const iconMarkup = renderToStaticMarkup(<MdOutlineLocalFireDepartment />);
-  const mapIcon = L.divIcon({
-    className: 'map-icon',
-    html: iconMarkup,
-  });
-  // const mapIcon = new mapIcon({
-  //   html: '<i class="fa fabeer fa-4x"></i>',
-  //   iconSize: [20, 15],
-  //   className: 'map-icon'
-  // });
-  // const mapIcon = L.divIcon({
-  //   html: '<i class="fa fabeer fa-4x"></i>',
-  //   iconSize: [20, 20],
-  //   className: 'map-icon'
-  // });
+interface MapProps {
+  eventData: any;
+  center: [number, number];
+  zoom: number;
+}
+
+const Map = ({ eventData, center, zoom }: MapProps) => {
+  let fires;
+  if(eventData.length>0){
+    fires = eventData.map((event: { id: String; categories: { id: String; title: String }[]; geometry: { coordinates: [number, number]; }[]; title: String; }) => {
+      if (event.categories[0].id === "wildfires"){
+        return <LocationMarker 
+                  key={event.id} 
+                  coords={[event.geometry[0].coordinates[1], event.geometry[0].coordinates[0]]} 
+                  title={event.title} 
+                  id={event.id}
+                  type={event.categories[0].title}
+              />
+      }
+      return null
+    })
+  }
+  console.log(fires)
+  const title = "Windy Creek Fire"
 
 return (
   <>
   <MapContainer center={center} zoom={zoom} className="map-container">
-      {/* <ChangeView center={center} zoom={zoom} /> */}
-      <TileLayer
+\      <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={center} icon={mapIcon}>
-        <Popup>
-          <div>
-            {mapData.city}
-            <br />
-            {mapData.state}, {mapData.country}
-            <br /> AQI: 4
-          </div>
-        </Popup>
-      </Marker>
+      {/* <LocationMarker coords={center} title={title} /> */}
+      {fires}
     </MapContainer>
     </>
 )
+}
+
+Map.defaultProps = {
+  center: [33.91752, -116.78724],
+  zoom: 7
 }
 
 export default Map
