@@ -9,6 +9,7 @@ function App() {
   const [eventData, setEventData] = useState<any>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<AxiosError | null>(null)
+  const [checked, setChecked] = useState({wildfires: false, severeStorms: false, volcanoes: false, seaLakeIce: false})
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -32,9 +33,9 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header checked={checked} setChecked={setChecked} />
       {/* {!loading ? <Map eventData={eventData} /> : <LoadingSpinner />} */}
-      <Map eventData={eventData} />
+      <Map eventData={eventData} dataSet={checked} />
       {loading && <LoadingSpinner />}
     </div>
   )

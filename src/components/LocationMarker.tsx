@@ -5,19 +5,28 @@ import {
 import { renderToStaticMarkup } from 'react-dom/server'
 import * as L from "leaflet"
 import { MdOutlineLocalFireDepartment } from 'react-icons/md'
-import { IoThunderstorm }  from 'react-icons/io'
+import { IoMdThunderstorm, IoMdAlert }  from 'react-icons/io'
+import { WiVolcano } from 'react-icons/wi'
+import { GiIceberg } from 'react-icons/gi'
 
 interface LocationMarkerProps {
     coords: [number, number];
-    title: String;
-    id: String;
-    type: String;
+    title: string;
+    id: string;
+    type: string;
 }
 
 const LocationMarker = ({ coords, title, id, type }: LocationMarkerProps) => {
-    const iconMarkup = renderToStaticMarkup(<MdOutlineLocalFireDepartment />)
+    
+    const iconMarkup = type === "Wildfires" 
+            ? renderToStaticMarkup(<MdOutlineLocalFireDepartment />)
+            : type ==="Severe Storms" ? renderToStaticMarkup(<IoMdThunderstorm />)
+            : type ==="Volcanoes" ? renderToStaticMarkup(<WiVolcano />)
+            : type ==="Sea and Lake Ice" ? renderToStaticMarkup(<GiIceberg />)
+            : renderToStaticMarkup(<IoMdAlert />)
+
     const mapIcon = L.divIcon({
-        className: 'map-icon',
+        className: type === "Wildfires" ? 'fire-icon' : type === "Severe Storms" ? 'storm-icon' : type === "Volcanoes" ? 'volcano-icon' : type === "Sea and Lake Ice" ? 'ice-icon' : 'alert-icon',
         html: iconMarkup,
         });
 

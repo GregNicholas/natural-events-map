@@ -3,7 +3,7 @@ import {
   TileLayer
 } from 'react-leaflet'
 import LocationMarker from './LocationMarker'
-import {EventData} from '../types'
+// import {EventData} from '../types'
 // import { renderToStaticMarkup } from 'react-dom/server';
 // import * as L from "leaflet";
 
@@ -11,13 +11,14 @@ interface MapProps {
   eventData: any;
   center: [number, number];
   zoom: number;
+  dataSet: any;
 }
 
-const Map = ({ eventData, center, zoom }: MapProps) => {
-  let fires;
+const Map = ({ eventData, center, zoom, dataSet }: MapProps) => {
+  let events;
   if(eventData.length>0){
-    fires = eventData.map((event: { id: String; categories: { id: String; title: String }[]; geometry: { coordinates: [number, number]; }[]; title: String; }) => {
-      if (event.categories[0].id === "wildfires"){
+    events = eventData.map((event: { id: string; categories: { id: string; title: string }[]; geometry: { coordinates: [number, number]; }[]; title: string; }) => {
+      if (dataSet[event.categories[0].id]){
         return <LocationMarker 
                   key={event.id} 
                   coords={[event.geometry[0].coordinates[1], event.geometry[0].coordinates[0]]} 
@@ -29,8 +30,6 @@ const Map = ({ eventData, center, zoom }: MapProps) => {
       return null
     })
   }
-  console.log(fires)
-  const title = "Windy Creek Fire"
 
 return (
   <>
@@ -39,8 +38,7 @@ return (
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* <LocationMarker coords={center} title={title} /> */}
-      {fires}
+      {events}
     </MapContainer>
     </>
 )
