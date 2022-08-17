@@ -29,7 +29,7 @@ const Header = ({checked, setChecked}: HeaderProps) => {
   };
   return (
     <header className="header">
-        <div>
+        <div className="header-title">
         <span className="header-icon"><FcGlobe /></span>
         <h1>Natural Events Tracker</h1>
         </div>
