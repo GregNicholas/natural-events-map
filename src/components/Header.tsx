@@ -34,10 +34,14 @@ const Header = ({checked, setChecked}: HeaderProps) => {
         <h1>Natural Events Tracker</h1>
         </div>
         <div className="selections">
-          <Checkbox name="wildfires" label="Wildfires" checked={checked.wildfires} handleChange={handleChange}/>
-          <Checkbox name="severeStorms" label="Severe Storms" checked={checked.severeStorms} handleChange={handleChange}/>
-          <Checkbox name="volcanoes" label="Volcanoes" checked={checked.volcanoes} handleChange={handleChange}/>
-          <Checkbox name="seaLakeIce" label="Sea/Lake Ice" checked={checked.volcanoes} handleChange={handleChange}/>
+          <div>
+          <Checkbox icon="fire-icon" name="wildfires" label="Wildfires" checked={checked.wildfires} handleChange={handleChange}/>
+          <Checkbox icon="storm-icon" name="severeStorms" label="Severe Storms" checked={checked.severeStorms} handleChange={handleChange}/>
+          </div>
+          <div>
+          <Checkbox icon="volcano-icon" name="volcanoes" label="Volcanoes" checked={checked.volcanoes} handleChange={handleChange}/>
+          <Checkbox icon="iceIcon" name="seaLakeIce" label="Sea/Lake Ice" checked={checked.seaLakeIce} handleChange={handleChange}/>
+          </div>
         </div>
     </header>
   )

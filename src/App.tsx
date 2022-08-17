@@ -9,7 +9,7 @@ function App() {
   const [eventData, setEventData] = useState<any>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<AxiosError | null>(null)
-  const [checked, setChecked] = useState({wildfires: false, severeStorms: false, volcanoes: false, seaLakeIce: false})
+  const [checked, setChecked] = useState({wildfires: true, severeStorms: false, volcanoes: false, seaLakeIce: false})
 
   useEffect(() => {
     const fetchEvents = async () => {

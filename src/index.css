@@ -56,6 +56,17 @@
   font-size: 1.5rem;
 }
 
+.selections label span {
+  font-size: 1.4rem;
+  margin-right: .2rem;
+}
+
+.selections div {
+  display: flex;
+  gap: 1rem;
+  /* flex-direction: column; */
+}
+
 .loader {
   display: flex;
   flex-direction: column;
@@ -98,8 +109,8 @@
 }
 
 .header {
-  padding: 1rem;
-  background-color: midnightblue;
+  padding: 0.5rem;
+  background-color: lightseagreen;
   color: white;
   display: flex;
   flex-direction: column;
@@ -109,6 +120,7 @@
   top: 0;
   width: 100vw;
   z-index: 1000;
+  text-shadow: 1px 1px 3px black;
 }
 
 .header h1 {
@@ -123,8 +135,21 @@
   align-items: center;
 }
 
-.selections{
+.selections {
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  font-weight: bold;
+  
+}
+
+.checkbox {
+  margin-right: 0.2rem;
+}
+
+@media (max-width: 768px) {
+  .selections div {
+    flex-direction: column;
+    gap: 0;
+  }
 }
